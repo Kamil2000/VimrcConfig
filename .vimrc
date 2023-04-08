@@ -1,17 +1,12 @@
-call plug#begin('~/.vim/plugged')
-Plug 'mileszs/ack.vim'
+call plug#begin()
 Plug 'sjl/badwolf'
 Plug 'scrooloose/nerdtree'
-Plug 'aklt/plantuml-syntax'
 Plug 'tpope/vim-abolish'
-Plug 'vim-scripts/vcscommand.vim'
 Plug 'qpkorr/vim-bufkill'
-Plug 'tpope/vim-commentary'
 Plug 'rrethy/vim-illuminate'
 Plug 'tpope/vim-eunuch'
-Plug 'gustafj/vim-ttcn'
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'w0rp/ale'
+Plug 'prabirshrestha/asyncomplete.vim'
 call plug#end()
 
 
@@ -64,7 +59,7 @@ autocmd FileType perl call Vimrc_SetBracketsMapping()
 autocmd FileType js,ts call Vimrc_SetBracketsMapping()
 autocmd FileType go call Vimrc_SetBracketsMapping()
 
-let g:ackprog='ag --nogroup --nocolor --column --smart-case'
+" let g:ackprog='ag --nogroup --nocolor --column --smart-case'
 
 colorscheme badwolf
 set noswapfile
@@ -87,6 +82,10 @@ command WideWindow vertical resize 70
 let g:ale_linters_explicit = 1
 let g:ale_linters={}
 
+
+let g:asyncomplete_auto_popup = 0
+let g:asyncomplete_auto_completeopt = 0
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 se completeopt=menu,menuone,longest,popup,noinsert,noselect "" popup/preview
 
 if exists('g:local_vimrc_script')
