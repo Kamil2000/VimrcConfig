@@ -82,7 +82,6 @@ command WideWindow vertical resize 70
 let g:ale_linters_explicit = 1
 let g:ale_linters={}
 
-
 let g:asyncomplete_auto_popup = 0
 let g:asyncomplete_auto_completeopt = 0
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
