@@ -3,7 +3,6 @@ Plug 'sjl/badwolf'
 Plug 'tpope/vim-abolish'
 Plug 'qpkorr/vim-bufkill'
 Plug 'rrethy/vim-illuminate'
-Plug 'tpope/vim-eunuch'
 Plug 'w0rp/ale'
 Plug 'prabirshrestha/asyncomplete.vim'
 call plug#end()
