@@ -1,6 +1,5 @@
 call plug#begin()
 Plug 'sjl/badwolf'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-abolish'
 Plug 'qpkorr/vim-bufkill'
 Plug 'rrethy/vim-illuminate'
@@ -65,7 +64,6 @@ colorscheme badwolf
 set noswapfile
 set nobackup
 set nowritebackup
-autocmd Filetype netrw setl buhidden=wipe
 
 set complete=.,w,b,k
 
@@ -76,8 +74,24 @@ let g:Illuminate_reltime_delay=0.1
 
 hi illuminatedWord ctermbg=53
 
-command WNERDTree NERDTree | vertical resize 70
+" netrw file browser settings
 command WideWindow vertical resize 70
+let g:netrw_keepdir = 0
+let g:netrw_winsize = 20
+let g:netrw_banner = 0
+let g:netrw_localcopydircmd = 'cp -r'
+" hi! link netrwMarkFile Search
+command ExCd Explore %:p:h
+command LexCd Lexplore %:p:h
+function! NetrwMapping()
+    nmap <buffer> gf :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
+    nmap <buffer> gt :echo 'Target:' . netrw#Expose("netrwmftgt")<CR>
+endfunction
+
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
 
 let g:ale_linters_explicit = 1
 let g:ale_linters={}
