@@ -94,9 +94,20 @@ augroup END
 
 let g:ale_linters_explicit = 1
 let g:ale_linters={}
-
+let g:ale_completion_enabled=0
+let g:ale_completion_delay=0
+let g:ale_completion_max_suggestions=50
 let g:asyncomplete_auto_popup = 0
 let g:asyncomplete_auto_completeopt = 0
+imap <c-x><c-p> <Plug>(asyncomplete_force_refresh)
+nnoremap <c-x><c-p> :ALEHover<CR>
+
+augroup HoverAfterComplete                                                        
+    autocmd!                                                                    
+    " display argument list of the selected completion candidate using ALEHover
+    autocmd User ALECompletePost ALEHover                                       
+augroup END
+
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 se completeopt=menu,menuone,longest,popup,noinsert,noselect "" popup/preview
 

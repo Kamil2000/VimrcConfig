@@ -1,3 +1,3 @@
 #!/bin/bash
 
-vim --cmd 'let g:local_vimrc_script="./cpp_local_vimrc.vim"' "${@}"
+vim --cmd 'let g:local_vimrc_script="~/Documents/Projects/VimrcConfig/VimConf/cpp_vimrc.vim"' "${@}"
