@@ -2,9 +2,16 @@ import argparse
 import os
 import uuid
 import string
+import datetime
 
 parser = argparse.ArgumentParser(prog='Header guard generator')
-parser.add_argument("-f", dest="filename")
+parser.add_argument("-f", dest="filename", required=True, help="filename to generate guard for")
+parser.add_argument("-p", "--prefix", dest="prefix", default="HEADER", help="prefix for quard variable")
+parser.add_argument("--uuid", dest="uuid_suffix", action="store_true", help="Use uuid as a suffix")
+parser.add_argument("--date", dest="date_suffix", action="store_true", help="Use date as a suffix")
+parser.add_argument("--datetime", dest="datetime_suffix", action="store_true", help="Use datetime as a suffix")
+parser.add_argument("-s", "--simplify", dest="simplify", action="store_true", help="simplify format - don't use any prefix")
+parser.add_argument("-x", "--execute", dest="execute", action="store_true", help="look for and mofify file in-place to add header guard")
 
 args = parser.parse_args()
 filename = args.filename
@@ -16,9 +23,17 @@ remove_specials = str.maketrans("", "", string.punctuation)
 root, ext = os.path.splitext(filename)
 ext = ext.translate(remove_specials)
 basename = os.path.basename(root)
-guid = str(uuid.uuid4()).translate(remove_specials).lower()
+suffix = ""
+generated_uuid = str(uuid.uuid4())
+generated_date = datetime.datetime.now()
+if args.uuid_suffix:
+    suffix =  "_" + generated_uuid.translate(remove_specials).lower()
+elif args.date_suffix:
+    suffix = generated_date.strftime("_%d_%m_%Y")
+elif args.datetime_suffix:
+    suffix = generated_date.strftime("_%H%M_%d_%m_%Y")
 
-guard = "HEADER_"
+guard = "" if args.simplify else f"{args.prefix}_"
 for index, c in enumerate(basename):
     if index == 0:
         guard += c.upper()
@@ -28,9 +43,8 @@ for index, c in enumerate(basename):
         continue
     guard += c.upper()
 guard += f"_{ext.upper()}"
-guard += f"_{guid}"
+guard += suffix
 print(f"Calculated unique guard for file: {guard}")
-    
         
 
 
