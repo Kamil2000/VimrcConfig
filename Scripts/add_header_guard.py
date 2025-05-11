@@ -45,6 +45,27 @@ for index, c in enumerate(basename):
 guard += f"_{ext.upper()}"
 guard += suffix
 print(f"Calculated unique guard for file: {guard}")
+
+if not args.execute:
+    exit(0)
+
+file_content = ''
+with open(filename, 'r') as file:
+    file_content = file.read()
+
+additional_content = f"""
+#ifndef {guard}
+#define {guard}
+"""
+file_content = additional_content + file_content
+additional_content = f"""
+#endif // {guard}
+"""
+file_content += additional_content
+
+with open(filename, 'w') as file:
+    file.write(file_content)
+
         
 
 
