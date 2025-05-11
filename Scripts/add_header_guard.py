@@ -27,11 +27,11 @@ suffix = ""
 generated_uuid = str(uuid.uuid4())
 generated_date = datetime.datetime.now()
 if args.uuid_suffix:
-    suffix =  "_" + generated_uuid.translate(remove_specials).lower()
+    suffix =  "_" + generated_uuid.translate(remove_specials).upper()
 elif args.date_suffix:
     suffix = generated_date.strftime("_%d_%m_%Y")
 elif args.datetime_suffix:
-    suffix = generated_date.strftime("_%H%M_%d_%m_%Y")
+    suffix = generated_date.strftime("_%H%M%S_%d_%m_%Y")
 
 guard = "" if args.simplify else f"{args.prefix}_"
 for index, c in enumerate(basename):
