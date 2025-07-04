@@ -4,7 +4,9 @@ Plug 'tpope/vim-abolish'
 Plug 'qpkorr/vim-bufkill'
 Plug 'rrethy/vim-illuminate'
 Plug 'w0rp/ale'
-Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py  --clangd-completer' }
+" requires call of install.py --clangd-completer
+" requires: sudo apt install build-essential cmake3 python3-dev
 call plug#end()
 
 
@@ -93,13 +95,15 @@ augroup netrw_mapping
 augroup END
 
 let g:ale_linters_explicit = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
 let g:ale_linters={}
 let g:ale_completion_enabled=0
 let g:ale_completion_delay=0
 let g:ale_completion_max_suggestions=50
-let g:asyncomplete_auto_popup = 0
-let g:asyncomplete_auto_completeopt = 0
-imap <c-x><c-p> <Plug>(asyncomplete_force_refresh)
+
 nnoremap <c-x><c-p> :ALEHover<CR>
 
 augroup HoverAfterComplete                                                        
@@ -111,6 +115,14 @@ augroup END
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 se completeopt=menu,menuone,longest,popup,noinsert,noselect "" popup/preview
 
+" YouCompleteMe default
+let g:ycm_auto_trigger=0
+let g:ycm_min_num_of_chars_for_completion = 100
+let g:ycm_show_diagnostics_ui = 0
+" use :YcmForceCompileAndDiagnostics
+" *youcompleteme-signature-help* <- signature help
+
+" Calling local vimrc function
 if exists('g:local_vimrc_script')
     execute "source " . g:local_vimrc_script
 endif
