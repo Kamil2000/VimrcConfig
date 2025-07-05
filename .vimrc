@@ -3,10 +3,10 @@ Plug 'sjl/badwolf'
 Plug 'tpope/vim-abolish'
 Plug 'qpkorr/vim-bufkill'
 Plug 'rrethy/vim-illuminate'
+" Plug 'ycm-core/YouCompleteMe', { 'tag': 'legacy-vim-8.2', 'do': 'python3 ./install.py  --clangd-completer'}
 " In case of these plugins, it is probably more stable to get them from repo
 " Plug 'w0rp/ale'
-" Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py  --clangd-completer' }
-" requires call of install.py --clangd-completer
+" " requires call of install.py --clangd-completer or 'do': 'python3 ./install.py  --clangd-completer'
 " requires: sudo apt install build-essential cmake3 python3-dev
 " vam install youcompleteme " for using debian packages
 call plug#end()
