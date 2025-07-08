@@ -3,9 +3,10 @@ Plug 'sjl/badwolf'
 Plug 'tpope/vim-abolish'
 Plug 'qpkorr/vim-bufkill'
 Plug 'rrethy/vim-illuminate'
-" Plug 'ycm-core/YouCompleteMe', { 'tag': 'legacy-vim-8.2', 'do': 'python3 ./install.py  --clangd-completer'}
+Plug 'w0rp/ale'
+" Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'ycm-core/YouCompleteMe', { 'tag': 'legacy-vim-8.2', 'do': 'python3 ./install.py  --clangd-completer'}
 " In case of these plugins, it is probably more stable to get them from repo
-" Plug 'w0rp/ale'
 " " requires call of install.py --clangd-completer or 'do': 'python3 ./install.py  --clangd-completer'
 " requires: sudo apt install build-essential cmake3 python3-dev
 " vam install youcompleteme " for using debian packages
@@ -106,21 +107,17 @@ let g:ale_completion_enabled=0
 let g:ale_completion_delay=0
 let g:ale_completion_max_suggestions=50
 
-nnoremap <c-x><c-p> :ALEHover<CR>
-
-augroup HoverAfterComplete                                                        
-    autocmd!                                                                    
-    " display argument list of the selected completion candidate using ALEHover
-    autocmd User ALECompletePost ALEHover                                       
-augroup END
+let g:asyncomplete_enable_for_all = 0 
+let g:asyncomplete_auto_popup = 0
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-se completeopt=menu,menuone,longest,popup,noinsert,noselect "" popup/preview
+let g:asyncomplete_auto_completeopt = 0
+se completeopt=menu,menuone,longest,popup,noinsert,noselect,preview "" popup/preview
 
 " YouCompleteMe default
 let g:ycm_auto_trigger=0
 let g:ycm_min_num_of_chars_for_completion = 100
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
 " use :YcmForceCompileAndDiagnostics
 " *youcompleteme-signature-help* <- signature help
 
