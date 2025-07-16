@@ -84,12 +84,18 @@ let g:netrw_keepdir = 0
 let g:netrw_winsize = 20
 let g:netrw_banner = 0
 let g:netrw_localcopydircmd = 'cp -r'
+let g:netrw_browse_split = 0
+
+
 " hi! link netrwMarkFile Search
-command ExCd Explore %:p:h
-command LexCd Lexplore %:p:h
+command CDexplore Explore %:p:h
+command LCDexplore Lexplore %:p:h
+command TCDexplore Texplore %:p:h
+
 function! NetrwMapping()
     nmap <buffer> gf :echo join(netrw#Expose("netrwmarkfilelist"), "\n")<CR>
     nmap <buffer> gt :echo 'Target:' . netrw#Expose("netrwmftgt")<CR>
+    nmap <buffer> <c-o> o:close<CR>
 endfunction
 
 augroup netrw_mapping
