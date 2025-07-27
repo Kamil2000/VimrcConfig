@@ -56,3 +56,5 @@
 
 ; ===========================================
 
+(require 'treemacs)
+(treemacs-indent-guide-mode t)
