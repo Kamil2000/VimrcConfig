@@ -58,3 +58,19 @@
 
 (require 'treemacs)
 (treemacs-indent-guide-mode t)
+(global-set-key (kbd "C-c p") 'treemacs-add-and-display-current-project-exclusively)
+(treemacs-project-follow-mode t)
+
+(require 'company)
+(global-set-key (kbd "C-c o") 'company-complete)
+(add-hook 'after-init-hook 'global-company-mode) ; could be replaced later
+(setq company-minimum-prefix-length 1) ; use only when idle dealy disables automatic mode
+(setq company-idle-delay nil) ; disable automatic company
+
+(require 'lsp-mode) ; M-x lsp-mode to enable
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
+
+
