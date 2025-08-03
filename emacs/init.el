@@ -2,7 +2,7 @@
 ; to load copy file to ~/.emacs or ~/.emacs.el
 ; or use (load-file "path") to load this file in ~/.emacs.el
 
-(load-theme 'manoj-dark t)
+(load-theme 'wombat t)
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
@@ -70,7 +70,11 @@
 (require 'lsp-mode) ; M-x lsp-mode to enable
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq lsp-headerline-breadcrumb-enable nil)
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
+(require 'flymake)
+(define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
+(define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
 
