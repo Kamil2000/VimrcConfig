@@ -5,7 +5,7 @@
 (load-theme 'wombat t)
 (tool-bar-mode 0)
 ; (menu-bar-mode 0)
-
+1
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (display-line-numbers-mode)
@@ -60,7 +60,8 @@
 
 (require 'treemacs) 
 (treemacs-indent-guide-mode t)
-(global-set-key (kbd "C-c p") 'treemacs-add-and-display-current-project-exclusively)
+(global-set-key (kbd "C-c P") 'treemacs-add-and-display-current-project-exclusively)
+(global-set-key (kbd "C-c p") 'treemacs)
 (treemacs-project-follow-mode t)
 
 (require 'company)
