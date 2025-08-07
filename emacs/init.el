@@ -3,6 +3,8 @@
 ; or use (load-file "path") to load this file in ~/.emacs.el
 
 (load-theme 'wombat t)
+(tool-bar-mode 0)
+; (menu-bar-mode 0)
 
 (add-hook 'prog-mode-hook
 	  (lambda ()
@@ -56,7 +58,7 @@
 
 ; ===========================================
 
-(require 'treemacs)
+(require 'treemacs) 
 (treemacs-indent-guide-mode t)
 (global-set-key (kbd "C-c p") 'treemacs-add-and-display-current-project-exclusively)
 (treemacs-project-follow-mode t)
@@ -78,4 +80,10 @@
 (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
 (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
 (setq flymake-no-changes-timeout nil)
-
+(defun el-init-flymake-buf-diag()
+  (interactive)
+  (when (fboundp 'flymake-show-diagnostics-buffer)
+    (flymake-show-diagnostics-buffer))
+  (when (fboundp 'flymake-show-buffer-diagnostics)
+    (flymake-show-buffer-diagnostics)))
+(define-key flymake-mode-map (kbd "C-c l") 'el-init-flymake-buf-diag)
