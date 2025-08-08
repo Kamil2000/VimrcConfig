@@ -5,7 +5,7 @@
 (load-theme 'wombat t)
 (tool-bar-mode 0)
 ; (menu-bar-mode 0)
-1
+
 (add-hook 'prog-mode-hook
 	  (lambda ()
 	    (display-line-numbers-mode)
@@ -65,8 +65,12 @@
 (treemacs-project-follow-mode t)
 
 (require 'company)
-(global-set-key (kbd "C-c o") 'company-complete)
-(add-hook 'after-init-hook 'global-company-mode) ; could be replaced later
+; (global-set-key (kbd "C-c o") 'company-complete)
+(define-key company-mode-map (kbd "C-SPC") 'company-complete)
+(define-key company-mode-map (kbd "C-c o") 'company-complete)
+(add-hook 'c-mode-hook 'company)
+(add-hook 'c++-mode-hook 'company)
+(add-hook 'python-mode-hook 'company)
 (setq company-minimum-prefix-length 1) ; use only when idle dealy disables automatic mode
 (setq company-idle-delay nil) ; disable automatic company
 
@@ -76,6 +80,7 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
+(add-hook 'python-mode-hook 'lsp)
 
 (require 'flymake)
 (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
@@ -88,3 +93,35 @@
   (when (fboundp 'flymake-show-buffer-diagnostics)
     (flymake-show-buffer-diagnostics)))
 (define-key flymake-mode-map (kbd "C-c l") 'el-init-flymake-buf-diag)
+
+(require 'dap-mode)
+(setq dap-auto-configure-features '(sessions locals controls tooltip))
+(define-key dap-mode-map (kbd "C-c d n") 'dap-next)
+(define-key dap-mode-map (kbd "C-c d s") 'dap-step-in)
+(define-key dap-mode-map (kbd "C-c d S") 'dap-step-out)
+(define-key dap-mode-map (kbd "C-c d c") 'dap-continue)
+
+(define-key dap-mode-map (kbd "C-c d b") 'dap-breakpoint-add)
+(define-key dap-mode-map (kbd "C-c d B") 'dap-breakpoint-delete)
+(define-key dap-mode-map (kbd "C-c d R") 'dap-breakpoint-delete-all) ; remove
+(define-key dap-mode-map (kbd "C-c d C-b") 'dap-breakpoint-condition)
+(define-key dap-mode-map (kbd "C-c d M-b") 'dap-breakpoint-hit-condition)
+
+(define-key dap-mode-map (kbd "C-c d d") 'dap-debug)
+(define-key dap-mode-map (kbd "C-c d D") 'dap-debug-last)
+(define-key dap-mode-map (kbd "C-c d C-d") 'dap-debug-recent)
+(define-key dap-mode-map (kbd "C-c d M-d") 'dap-disconnect)
+
+(define-key dap-mode-map (kbd "C-c d e") 'dap-eval-thing-at-point)
+(define-key dap-mode-map (kbd "C-c d E") 'dap-eval)
+
+(define-key dap-mode-map (kbd "C-c D b") 'dap-ui-breakpoints)
+(define-key dap-mode-map (kbd "C-c D l") 'dap-ui-locals)
+(define-key dap-mode-map (kbd "C-c D e") 'dap-ui-expressions)
+(define-key dap-mode-map (kbd "C-c D o") 'dap-go-to-output-buffer)
+(define-key dap-mode-map (kbd "C-c D h") 'dap-hydra)
+
+
+(require 'dap-python)
+(setq dap-python-debugger 'debugpy) ; python -m pip install debugpy
+
