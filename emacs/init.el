@@ -1,4 +1,4 @@
-; basinc settings
+; basic settings
 ; to load copy file to ~/.emacs or ~/.emacs.el
 ; or use (load-file "path") to load this file in ~/.emacs.el
 
@@ -28,8 +28,9 @@
 
 (require 'package)
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ; (setq package-archive-priorities '(("gnu" . 20)("melpa-stable" . 10)))
 (setq package-enable-at-startup t)
 
@@ -81,6 +82,8 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'python-mode-hook 'lsp)
+(add-hook 'lsp-mode-hook 'turn-on-font-lock)
+; (add-hook 'lsp-mode-hook (lambda () (run-with-timer 1 nil 'turn-on-font-lock)))
 
 (require 'flymake)
 (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
@@ -120,7 +123,7 @@
 (define-key dap-mode-map (kbd "C-c D e") 'dap-ui-expressions)
 (define-key dap-mode-map (kbd "C-c D o") 'dap-go-to-output-buffer)
 (define-key dap-mode-map (kbd "C-c D h") 'dap-hydra)
-
+(define-key dap-mode-map (kbd "C-c D D") 'dap-delete-all-sessions)
 
 (require 'dap-python)
 (setq dap-python-debugger 'debugpy) ; python -m pip install debugpy
