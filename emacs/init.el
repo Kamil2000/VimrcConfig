@@ -49,7 +49,7 @@
 (add-to-list 'package-selected-packages 'lsp-mode t)
 (add-to-list 'package-selected-packages 'lsp-ui t)
 (add-to-list 'package-selected-packages 'company t)
-;; (add-to-list 'package-selected-packages 'dap-mode t)
+(add-to-list 'package-selected-packages 'dap-mode t)
 ; END list of packages
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
@@ -94,34 +94,34 @@
     (flymake-show-buffer-diagnostics)))
 (define-key flymake-mode-map (kbd "C-c l") 'el-init-flymake-buf-diag)
 
-;; (require 'dap-mode)
-;; (setq dap-auto-configure-features '(sessions locals controls tooltip))
-;; (define-key dap-mode-map (kbd "C-c d n") 'dap-next)
-;; (define-key dap-mode-map (kbd "C-c d s") 'dap-step-in)
-;; (define-key dap-mode-map (kbd "C-c d S") 'dap-step-out)
-;; (define-key dap-mode-map (kbd "C-c d c") 'dap-continue)
+(require 'dap-mode)
+(setq dap-auto-configure-features '(sessions locals controls tooltip))
+(define-key dap-mode-map (kbd "C-c d n") 'dap-next)
+(define-key dap-mode-map (kbd "C-c d s") 'dap-step-in)
+(define-key dap-mode-map (kbd "C-c d S") 'dap-step-out)
+(define-key dap-mode-map (kbd "C-c d c") 'dap-continue)
 
-;; (define-key dap-mode-map (kbd "C-c d b") 'dap-breakpoint-add)
-;; (define-key dap-mode-map (kbd "C-c d B") 'dap-breakpoint-delete)
-;; (define-key dap-mode-map (kbd "C-c d R") 'dap-breakpoint-delete-all) ; remove
-;; (define-key dap-mode-map (kbd "C-c d C-b") 'dap-breakpoint-condition)
-;; (define-key dap-mode-map (kbd "C-c d M-b") 'dap-breakpoint-hit-condition)
+(define-key dap-mode-map (kbd "C-c d b") 'dap-breakpoint-add)
+(define-key dap-mode-map (kbd "C-c d B") 'dap-breakpoint-delete)
+(define-key dap-mode-map (kbd "C-c d R") 'dap-breakpoint-delete-all) ; remove
+(define-key dap-mode-map (kbd "C-c d C-b") 'dap-breakpoint-condition)
+(define-key dap-mode-map (kbd "C-c d M-b") 'dap-breakpoint-hit-condition)
 
-;; (define-key dap-mode-map (kbd "C-c d d") 'dap-debug)
-;; (define-key dap-mode-map (kbd "C-c d D") 'dap-debug-last)
-;; (define-key dap-mode-map (kbd "C-c d C-d") 'dap-debug-recent)
-;; (define-key dap-mode-map (kbd "C-c d M-d") 'dap-disconnect)
+(define-key dap-mode-map (kbd "C-c d d") 'dap-debug)
+(define-key dap-mode-map (kbd "C-c d D") 'dap-debug-last)
+(define-key dap-mode-map (kbd "C-c d C-d") 'dap-debug-recent)
+(define-key dap-mode-map (kbd "C-c d M-d") 'dap-disconnect)
 
-;; (define-key dap-mode-map (kbd "C-c d e") 'dap-eval-thing-at-point)
-;; (define-key dap-mode-map (kbd "C-c d E") 'dap-eval)
+(define-key dap-mode-map (kbd "C-c d e") 'dap-eval-thing-at-point)
+(define-key dap-mode-map (kbd "C-c d E") 'dap-eval)
 
-;; (define-key dap-mode-map (kbd "C-c D b") 'dap-ui-breakpoints)
-;; (define-key dap-mode-map (kbd "C-c D l") 'dap-ui-locals)
-;; (define-key dap-mode-map (kbd "C-c D e") 'dap-ui-expressions)
-;; (define-key dap-mode-map (kbd "C-c D o") 'dap-go-to-output-buffer)
-;; (define-key dap-mode-map (kbd "C-c D h") 'dap-hydra)
+(define-key dap-mode-map (kbd "C-c D b") 'dap-ui-breakpoints)
+(define-key dap-mode-map (kbd "C-c D l") 'dap-ui-locals)
+(define-key dap-mode-map (kbd "C-c D e") 'dap-ui-expressions)
+(define-key dap-mode-map (kbd "C-c D o") 'dap-go-to-output-buffer)
+(define-key dap-mode-map (kbd "C-c D h") 'dap-hydra)
 
 
-;; (require 'dap-python)
-;; (setq dap-python-debugger 'debugpy) ; python -m pip install debugpy
+(require 'dap-python)
+(setq dap-python-debugger 'debugpy) ; python -m pip install debugpy
 
