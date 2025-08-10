@@ -3,6 +3,7 @@
 ; or use (load-file "path") to load this file in ~/.emacs.el
 
 (load-theme 'wombat t)
+(setq inhibit-startup-screen t)
 (tool-bar-mode 0)
 ; (menu-bar-mode 0)
 
@@ -79,6 +80,10 @@
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq lsp-headerline-breadcrumb-enable nil)
+(when (boundp 'lsp-enable-on-type-formatting)
+  (setq lsp-enable-on-type-formatting nil))
+(when (boundp 'lsp-idle-delay)
+  (setq lsp-idle-delay 5))
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 (add-hook 'python-mode-hook 'lsp)
@@ -88,7 +93,7 @@
 (require 'flymake)
 (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
 (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
-(setq flymake-no-changes-timeout nil)
+(setq flymake-no-changes-timeout 5)
 (defun el-init-flymake-buf-diag()
   (interactive)
   (when (fboundp 'flymake-show-diagnostics-buffer)
@@ -96,6 +101,8 @@
   (when (fboundp 'flymake-show-buffer-diagnostics)
     (flymake-show-buffer-diagnostics)))
 (define-key flymake-mode-map (kbd "C-c l") 'el-init-flymake-buf-diag)
+(when (boundp 'flymake-show-diagnostics-at-end-of-line)
+  (setq flymake-show-diagnostics-at-end-of-line t))
 
 (require 'dap-mode)
 (setq dap-auto-configure-features '(sessions locals controls tooltip))
