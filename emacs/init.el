@@ -18,12 +18,14 @@
 
 (setq backup-directory-alist '((".*" . "~/.Trash")))
 (setq-default case-fold-search nil)
-(global-tab-line-mode t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq c-set-style "k&r")
 (setq c-basic-offset 4)
+
+(require 'tab-line)
+(global-tab-line-mode t)
 
 ; ==========================================
 
@@ -80,12 +82,14 @@
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-enable-snippet 0)
 (when (boundp 'lsp-enable-on-type-formatting)
   (setq lsp-enable-on-type-formatting nil))
 (when (boundp 'lsp-idle-delay)
   (setq lsp-idle-delay 1))
 ;(add-hook 'lsp-mode-hook (lambda () (run-with-timer 2 nil 'turn-on-font-lock)))
 (add-hook 'lsp-mode-hook 'turn-on-font-lock)
+(add-hook 'lsp-mode-hook 'tab-line-mode--turn-on)
 ; CPP config
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
