@@ -27,6 +27,9 @@
 (require 'tab-line)
 (global-tab-line-mode t)
 
+(require 'tab-bar)
+(tab-bar-mode t)
+
 ; ==========================================
 
 (require 'package)
