@@ -36,6 +36,7 @@
   ;;(setq-local completion-styles '(initials flex)))
   (setq-local completion-styles '(basic initials partial-completion substring)))
 (add-hook 'icomplete-minibuffer-setup-hook 'my-icomplete-styles)
+(setq read-file-name-completion-ignore-case t)
 (icomplete-mode t)
 (define-key minibuffer-mode-map (kbd "C-c p") 'previous-history-element)
 (define-key minibuffer-mode-map (kbd "C-c <up>") 'previous-history-element)
