@@ -30,6 +30,19 @@
 (require 'tab-bar)
 (tab-bar-mode t)
 
+(require 'icomplete)
+(icomplete-vertical-mode t)
+(defun my-icomplete-styles ()
+  ;;(setq-local completion-styles '(initials flex)))
+  (setq-local completion-styles '(basic initials partial-completion substring)))
+(add-hook 'icomplete-minibuffer-setup-hook 'my-icomplete-styles)
+(icomplete-mode t)
+(define-key minibuffer-mode-map (kbd "C-c p") 'previous-history-element)
+(define-key minibuffer-mode-map (kbd "C-c <up>") 'previous-history-element)
+(define-key minibuffer-mode-map (kbd "C-c n") 'next-history-element)
+(define-key minibuffer-mode-map (kbd "C-c <down>") 'next-history-element)
+
+
 ; ==========================================
 
 (require 'package)
@@ -102,6 +115,7 @@
 ; (setq lsp-pylsp-plugins-pylint-enabled nil)
 ; (setq lsp-pylsp-plugins-pystyle-enabled nil)
 (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
+(setq lsp-keymap-prefix "C-c l")
 
 (require 'flymake)
 (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
@@ -113,7 +127,7 @@
     (flymake-show-diagnostics-buffer))
   (when (fboundp 'flymake-show-buffer-diagnostics)
     (flymake-show-buffer-diagnostics)))
-(define-key flymake-mode-map (kbd "C-c l") 'el-init-flymake-buf-diag)
+(define-key flymake-mode-map (kbd "C-c L") 'el-init-flymake-buf-diag)
 (when (boundp 'flymake-show-diagnostics-at-end-of-line)
   (setq flymake-show-diagnostics-at-end-of-line t))
 
