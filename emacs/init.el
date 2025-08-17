@@ -37,6 +37,8 @@
   (setq-local completion-styles '(basic initials partial-completion substring)))
 (add-hook 'icomplete-minibuffer-setup-hook 'my-icomplete-styles)
 (setq read-file-name-completion-ignore-case t)
+;; (setq icomplete-in-buffer t)
+;; (advice-add 'completion-at-point :after #'minibuffer-hide-completions)
 (icomplete-mode t)
 (define-key minibuffer-mode-map (kbd "C-c p") 'previous-history-element)
 (define-key minibuffer-mode-map (kbd "C-c <up>") 'previous-history-element)
